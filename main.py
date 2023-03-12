@@ -101,6 +101,37 @@ async def greet_user():
         "data": "Hello World. This app is a FastAPI for Project 3 of Udacity's ML for DevOps Nanodegree"
     }
 
+"""
+This code is a post request for an inference endpoint. 
+It takes in a CensusData object as an input, and converts it into a dictionary. 
+It then uses the process_data function to process the data, and passes it into the inference function to get a list of results. 
+
+The list of results is converted into a dictionary with each result being either '<=50k' or '>50k'. 
+
+Finally, the dictionary is returned. 
+"""
+
+
+@app.post("/inference")
+async def model_predict(endpoint_input: CensusData):
+    endpoint_input_dict = endpoint_input.dict(by_alias=True)
+    model_input = pd.DataFrame([endpoint_input_dict])
+
+    processed_model_input, _, _, _ = process_data(
+        model_input, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
+    )
+
+    inference_list = list(inference(model, processed_model_input))
+
+    result = {}
+    for i in range(len(inference_list)):
+        if inference_list[i] == 0:
+            result[i] = '<=50k'
+        else:
+            result[i] = '>50k'
+
+    return {"result": result}
+
 
 # This code checks if the current file is being run as the main program, and if so, it does nothing.
 if __name__ == '__main__':

@@ -31,9 +31,9 @@ sample = {
 data = json.dumps(sample)
 
 # Request to API
-res = requests.post(url, data=data)
+response = requests.post(url, data=data)
 
 # Response
-print("Status:", res.status_code)
+print("Status:", response.status_code)
 print("Data:")
-print(res.json())
+print(response.json())

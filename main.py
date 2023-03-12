@@ -12,8 +12,8 @@ from ml.model import inference, load
 
 
 """
-This function takes in a string as an argument and returns the same string with all underscores replaced with hyphens. 
-It uses the replace() method to do this. 
+This function takes in a string as an argument and returns the same string with all underscores replaced with hyphens.
+It uses the replace() method to do this.
 Input: String
 Output: String
 """
@@ -88,9 +88,9 @@ cat_features = [
 
 
 """
-This code creates a route "/" for an app using FastAPI. 
-When the route is accessed, the function greet_user() is executed, 
-which returns a dictionary containing the message "Hello World. 
+This code creates a route "/" for an app using FastAPI.
+When the route is accessed, the function greet_user() is executed,
+which returns a dictionary containing the message "Hello World.
 This app is a FastAPI for Project 3 of Udacity's ML for DevOps Nanodegree".
 """
 

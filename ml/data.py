@@ -11,21 +11,21 @@ def process_data(
     lb=None
 ):
     """
-    This function takes in 
-        a dataframe (X), 
-        a list of categorical features, 
-        a label (if applicable), 
-        whether or not it is training, 
-        an encoder, 
-        and a label binarizer. 
+    This function takes in
+        a dataframe (X),
+        a list of categorical features,
+        a label (if applicable),
+        whether or not it is training,
+        an encoder,
+        and a label binarizer.
 
-    If a label is provided, the function will separate the dataframe into X and y. 
-    It will then separate the dataframe into continuous and categorical features. 
-    If it is training, it will fit the encoder and label binarizer to the data. 
-    Otherwise, it will transform the data with the existing encoder and label binarizer. 
+    If a label is provided, the function will separate the dataframe into X and y.
+    It will then separate the dataframe into continuous and categorical features.
+    If it is training, it will fit the encoder and label binarizer to the data.
+    Otherwise, it will transform the data with the existing encoder and label binarizer.
 
-    Finally, it will concatenate the continuous and 
-    categorical features together and 
+    Finally, it will concatenate the continuous and
+    categorical features together and
     return X, y, encoder, and lb.
     """
     if label is not None:

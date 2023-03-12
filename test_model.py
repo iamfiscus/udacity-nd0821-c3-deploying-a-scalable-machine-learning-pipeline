@@ -9,6 +9,7 @@ from ml.model import train_model, compute_model_metrics, inference, load
 
 data = pd.read_csv('./data/census.csv')
 model = load('./model/random_forest.pkl')
+
 train, test = train_test_split(data, test_size=0.20)
 
 """

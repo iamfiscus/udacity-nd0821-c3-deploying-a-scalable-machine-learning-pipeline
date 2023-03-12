@@ -57,6 +57,63 @@ def compute_model_metrics(y, preds):
     return precision, recall, fbeta
 
 
+def compute_model_performance_on_slices(data, label, features, cat_features, model, encoder, lb):
+    """
+    This function computes the performance of a given model on slices of data. It takes in the following parameters: 
+    - data: a pandas DataFrame containing the data to be processed 
+    - label: the label column of the DataFrame 
+    - features: a list of features to slice by 
+    - cat_features: a list of categorical features in the DataFrame 
+    - model: a trained machine learning model 
+    - encoder: an encoder object used to encode categorical variables 
+    - lb: an instance of sklearn's LabelBinarizer object used to binarize labels 
+
+    The function first initializes an empty string and an empty list for storing performance metrics. 
+    It then loops through each feature in the list 'features' and its unique values, and processes the data using process_data(). 
+    The model is then used to make predictions on this slice of data, and compute_model_metrics() is used to calculate 
+    precision, recall, and fbeta scores. 
+
+    These scores are printed out and stored in all_performance string and model_performance list. 
+
+    Finally, a pandas DataFrame is created from the model_performance list, which contains columns for constant feature 
+    name, value, precision, recall, and fbeta scores. 
+    This DataFrame is written to a file called 'slice_output.txt', and returned by the function.
+    """
+    all_performance = ''
+    model_performance = []
+    for feature in features:
+        values = data[feature].unique()
+        for value in values:
+            data_to_test = data[data[feature] == value]
+            print(cat_features)
+            X_slice, y_slice, _, _ = process_data(
+                data_to_test, categorical_features=cat_features, label=label, training=False, encoder=encoder, lb=lb
+            )
+            preds = inference(model, X_slice)
+
+            precision, recall, fbeta = compute_model_metrics(y_slice, preds)
+
+            run_performance = f'''
+            Feature {feature}=={value}:
+            \tprecision: {precision}'
+            \trecall: {recall}
+            \tbeta: {fbeta}
+
+            '''
+            print(run_performance)
+
+            all_performance += run_performance
+            model_performance.append(
+                [feature, value, precision, recall, fbeta])
+    model_performance_df = pd.DataFrame(model_performance, columns=[
+                                        'constant_column', 'value', 'precision', 'recall', 'fbeta'])
+
+    with open('slice_output.txt', 'w') as performance_file:
+        performance_file.write(all_performance)
+
+    return model_performance_df
+
+
 def inference(model, X):
 
     return model.predict(X)

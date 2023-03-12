@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 from ml.data import process_data
-from ml.model import train_model, compute_model_metrics, inference, load
+from ml.model import train_model, compute_model_metrics, inference, load, compute_model_performance_on_slices
 
 data = pd.read_csv('./data/census.csv')
 model = load('./model/random_forest.pkl')
@@ -62,3 +62,9 @@ def test_compute_model_metrics():
     assert isinstance(precision, float)
     assert isinstance(recall, float)
     assert isinstance(fbeta, float)
+
+
+def test_compute_model_performance_on_slices():
+    performance_df = compute_model_performance_on_slices(
+        data=data, label="salary", features=cat_features, cat_features=cat_features, model=model, encoder=encoder, lb=lb)
+    assert isinstance(performance_df, pd.DataFrame)

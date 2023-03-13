@@ -102,13 +102,13 @@ async def greet_user():
     }
 
 """
-This code is a post request for an inference endpoint. 
-It takes in a CensusData object as an input, and converts it into a dictionary. 
-It then uses the process_data function to process the data, and passes it into the inference function to get a list of results. 
+This code is a post request for an inference endpoint.
+It takes in a CensusData object as an input, and converts it into a dictionary.
+It then uses the process_data function to process the data, and passes it into the inference function to get a list of results.
 
-The list of results is converted into a dictionary with each result being either '<=50k' or '>50k'. 
+The list of results is converted into a dictionary with each result being either '<=50k' or '>50k'.
 
-Finally, the dictionary is returned. 
+Finally, the dictionary is returned.
 """
 
 

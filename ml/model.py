@@ -59,24 +59,24 @@ def compute_model_metrics(y, preds):
 
 def compute_model_performance_on_slices(data, label, features, cat_features, model, encoder, lb):
     """
-    This function computes the performance of a given model on slices of data. It takes in the following parameters: 
-    - data: a pandas DataFrame containing the data to be processed 
-    - label: the label column of the DataFrame 
-    - features: a list of features to slice by 
-    - cat_features: a list of categorical features in the DataFrame 
-    - model: a trained machine learning model 
-    - encoder: an encoder object used to encode categorical variables 
-    - lb: an instance of sklearn's LabelBinarizer object used to binarize labels 
+    This function computes the performance of a given model on slices of data. It takes in the following parameters:
+    - data: a pandas DataFrame containing the data to be processed
+    - label: the label column of the DataFrame
+    - features: a list of features to slice by
+    - cat_features: a list of categorical features in the DataFrame
+    - model: a trained machine learning model
+    - encoder: an encoder object used to encode categorical variables
+    - lb: an instance of sklearn's LabelBinarizer object used to binarize labels
 
-    The function first initializes an empty string and an empty list for storing performance metrics. 
-    It then loops through each feature in the list 'features' and its unique values, and processes the data using process_data(). 
-    The model is then used to make predictions on this slice of data, and compute_model_metrics() is used to calculate 
-    precision, recall, and fbeta scores. 
+    The function first initializes an empty string and an empty list for storing performance metrics.
+    It then loops through each feature in the list 'features' and its unique values, and processes the data using process_data().
+    The model is then used to make predictions on this slice of data, and compute_model_metrics() is used to calculate
+    precision, recall, and fbeta scores.
 
-    These scores are printed out and stored in all_performance string and model_performance list. 
+    These scores are printed out and stored in all_performance string and model_performance list.
 
-    Finally, a pandas DataFrame is created from the model_performance list, which contains columns for constant feature 
-    name, value, precision, recall, and fbeta scores. 
+    Finally, a pandas DataFrame is created from the model_performance list, which contains columns for constant feature
+    name, value, precision, recall, and fbeta scores.
     This DataFrame is written to a file called 'slice_output.txt', and returned by the function.
     """
     all_performance = ''
